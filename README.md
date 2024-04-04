@@ -53,6 +53,7 @@ https://pytorch.org/docs/stable/tensors.html
 
 ###### PyTorch
 https://github.com/pytorch/pytorch
+https://pytorch.org/get-started/locally/
 
 # License
 Software Licensed under BSD-3-Clause License
