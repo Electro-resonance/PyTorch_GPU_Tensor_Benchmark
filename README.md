@@ -49,11 +49,11 @@ https://pytorch.org/
 # Useful Links:
 
 ###### PyTorch Tensor Documentation
-https://pytorch.org/docs/stable/tensors.html
+* https://pytorch.org/docs/stable/tensors.html
 
 ###### PyTorch
-https://github.com/pytorch/pytorch
-https://pytorch.org/get-started/locally/
+* https://github.com/pytorch/pytorch
+* https://pytorch.org/get-started/locally/
 
 # License
 Software Licensed under BSD-3-Clause License
