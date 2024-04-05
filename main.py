@@ -5,36 +5,10 @@
 # Created Date: 15th December 2022
 # License: BSD-3-Clause License
 # Organisation:
-# Project: https://github.com/Electro-resonance/PyTorchTensorBenchmark
+# Project: https://github.com/Electro-resonance/PyTorch_GPU_Tensor_Benchmark
 # Description: Simple Benchmark test of subsequent multiplying of large tensors
 # requiring enough capacity to reach 100% processing capacity on GPUs and CPUs.
 # =============================================================================
-
-import os
-from prettytable import PrettyTable as pt
-from prettytable import SINGLE_BORDER
-import psutil
-import random
-from si_prefix import si_format
-import time
-import torch
-
-print("Torch version:",torch.__version__)
-print("Cuda devices:",torch.cuda.device_count())
-print("Cuda initialised:",torch.cuda.is_initialized())
-print("Cuda GPU generic data type:",torch.get_autocast_gpu_dtype())
-print("Cuda available:",torch.cuda.is_available())
-if(torch.cuda.is_available()):
-    print('Current Cuda device:', torch.cuda.current_device())
-    print('GPU properties:',torch.cuda.get_device_properties(0))
-
-try:
-    # Attempt to use CUDA
-    cuda_tensor = torch.zeros(1).cuda()
-    print("CUDA Tensor successfully created.")
-except AssertionError as e:
-    # Handle the case where CUDA is not available
-    print("CUDA is not available:", e)
 
 #For Cuda GPU tests, requires CUDA to be installed and python needs to be installed from conda
 # Ensure to install Cuda for your GPU and OS.
@@ -48,8 +22,17 @@ except AssertionError as e:
 # ..\..\Scripts\conda.exe update -n base -c defaults conda
 # ..\..\Scripts\conda.exe install prettytable psutil pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
 
-
 #Pytorch Documentation: https://pytorch.org/docs/stable/tensors.html
+
+import os
+from prettytable import PrettyTable as pt
+from prettytable import SINGLE_BORDER
+import psutil
+import random
+from si_prefix import si_format
+import time
+import torch
+
 
 def benchmark_tensor_addition(iterations, tensor_size, tensor_type, debug=False):
     print("Cuda devices:",torch.cuda.device_count())
@@ -147,6 +130,29 @@ def benchmark_tensor_addition(iterations, tensor_size, tensor_type, debug=False)
     return [completion_secs, ops_second, ops_second_string, tensor_type, iterations, tensor_size, gpu_memory_usage, cpu_memory_usage]
 
 if __name__ == '__main__':
+
+    # Pre-checks and Cuda status
+    print("Torch version:", torch.__version__)
+    print("Cuda devices:", torch.cuda.device_count())
+    print("Cuda initialised:", torch.cuda.is_initialized())
+    print("Cuda GPU generic data type:", torch.get_autocast_gpu_dtype())
+    print("Cuda available:", torch.cuda.is_available())
+
+    if (torch.cuda.is_available()):
+        print('Current Cuda device:', torch.cuda.current_device())
+        print('GPU properties:', torch.cuda.get_device_properties(0))
+
+    # Simple attempt at using Cuda to catch any reported errors relating to installation
+    try:
+        # Attempt to use CUDA
+        cuda_tensor = torch.zeros(1).cuda()
+        print("CUDA Tensor successfully created.")
+    except AssertionError as e:
+        # Handle the case where CUDA is not available
+        print("CUDA is not available:", e)
+
+
+    # Iterate through the benchmarks for each data type
     results=[]
     torchtypes=[ torch.float64,
                  torch.float32,
@@ -167,6 +173,7 @@ if __name__ == '__main__':
                                                  tensor_type=torchtype,
                                                  debug=False))
 
+    # Print the results as a set of tables
     print('-'*80)
     print('Benchmark Summary')
     print('-' * 80)
@@ -183,4 +190,3 @@ if __name__ == '__main__':
                      "%0.3fGB" % result[7]]
         tb.add_row(table_row)
     print(tb)
-
