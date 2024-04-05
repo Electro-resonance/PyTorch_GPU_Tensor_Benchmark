@@ -18,6 +18,10 @@ times for each data type being tested. Doing so for a RTX 3060 GPU or I7 process
 └───────────────┴────────────┴─────────────┴─────────────────┴──────────────────┴────────────────┴────────────────┘
 ```
 
+The laptop GPU dashboard during this benchmark test:
+![image](https://github.com/Electro-resonance/PyTorch_GPU_Tensor_Benchmark/assets/98977744/11b53e98-6c75-4bf1-bfa7-422c4e9587e5)
+
+
 ### Example result on an I7-12700H running at 3.68 GHz
 ```
 ┌───────────────┬────────────┬─────────────┬─────────────────┬──────────────────┬────────────────┬────────────────┐
