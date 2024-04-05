@@ -1,6 +1,6 @@
 # PyTorch Tensor Benchmarking
 Benchmarking of tensor computation with very large tensors (half a billion words in size). The benchmark load is made
-by creating a two tensors, one an accumulator and one containing random numbers. The PyTorch code is then called to 
+by creating two tensors, one an accumulator and one containing random numbers. The PyTorch code is then called to 
 sequentially add the tensor containing random numbers to the accumulator tensor and then repeating the process 500 
 times for each data type being tested. Doing so for a RTX 3060 GPU or I7 processor presents a near 100% load.
 
